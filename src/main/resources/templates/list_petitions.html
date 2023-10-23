@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Petitions</title>
+</head>
+<body>
+<h1>List of Petitions</h1>
+<ul>
+    <li th:each="petition : ${petitions}">
+        <h2 th:text="${petition.title}"></h2>
+        <p th:text="${petition.description}"></p>
+    </li>
+</ul>
+</body>
+</html>
