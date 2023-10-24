@@ -6,8 +6,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 @WebMvcTest(PetitionController.class)
 public class PetitionControllerTest {
 
-    //@Autowired
-    //private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     //@Mock
     //private PetitionService petitionService;
