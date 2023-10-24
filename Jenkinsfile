@@ -32,13 +32,7 @@ pipeline {
             }
         }
 
-        stage('Package as WAR') {
-            steps {
-                // Package the application as a WAR file
-                sh 'mvn package'
 
-            }
-        }
     }
 
 
