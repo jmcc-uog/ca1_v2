@@ -13,7 +13,7 @@
 </div>
 
 <form th:action="@{/search-petitions}" method="get">
-    <input type="text" name="keyword" placeholder="Search Petitions">
+    <input type="text" name="query" placeholder="Search Petitions">
     <button type="submit">Search</button>
 </form>
 <table>
@@ -34,6 +34,9 @@
             <form th:action="@{/sign-petition}" method="post">
                 <input type="hidden" name="petitionId" th:value="${petition.id}">
                 <button type="submit">Sign</button>
+            </form>
+            <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
+                <button type="submit">View Signers</button>
             </form>
         </td>
     </tr>

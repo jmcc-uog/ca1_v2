@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Signers</title>
+</head>
+<body>
+<h2>Signers of the Petition: <span th:text="${petition.title}"></span></h2>
+<ul>
+    <li th:each="signer : ${petition.signers}">
+        <p th:text="${signer.firstName} + ' ' + ${signer.lastName} + ' (' + ${signer.email} + ')'"></p>
+    </li>
+</ul>
+
+<!-- Add a link to navigate back to the list of petitions -->
+<a href="/list-petitions">Back to List of Petitions</a>
+</body>
+</html>

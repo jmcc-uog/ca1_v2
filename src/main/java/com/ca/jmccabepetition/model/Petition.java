@@ -17,6 +17,7 @@ public class Petition {
 
     private String description;
 
+
     // Constructors, getters, and setters
 
     public Petition() {

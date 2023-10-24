@@ -33,6 +33,9 @@
                 <input type="hidden" name="petitionId" th:value="${petition.id}">
                 <button type="submit">Sign</button>
             </form>
+            <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
+                <button type="submit">View Signers</button>
+            </form>
         </td>
     </tr>
     </tbody>

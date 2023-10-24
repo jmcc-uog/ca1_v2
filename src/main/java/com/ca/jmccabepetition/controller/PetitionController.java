@@ -6,15 +6,12 @@ import com.ca.jmccabepetition.model.Signer;
 import com.ca.jmccabepetition.model.User;
 import com.ca.jmccabepetition.repository.PetitionRepository;
 import com.ca.jmccabepetition.repository.UserRepository;
+import com.ca.jmccabepetition.service.PetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -25,11 +22,13 @@ public class PetitionController {
 
     private final PetitionRepository petitionRepository;
     private final UserRepository userRepository;
+    private final PetitionService petitionService;
 
     @Autowired
-    public PetitionController(PetitionRepository petitionRepository, UserRepository userRepository) {
+    public PetitionController(PetitionRepository petitionRepository, UserRepository userRepository, PetitionService petitionService) {
         this.petitionRepository = petitionRepository;
         this.userRepository = userRepository;
+        this.petitionService = petitionService;
     }
 
     @GetMapping("/")
@@ -109,6 +108,35 @@ public class PetitionController {
     public String thankYou() {
         return "thank-you";
     }
+    @GetMapping("/search-petitions")
+    public String searchPetitions(@RequestParam(name = "query", required = false) String query, Model model) {
+        // Implement the search logic here
+        List<Petition> searchResults = petitionService.searchPetitions(query);
+        model.addAttribute("searchResults", searchResults);
+        return "search-petitions";
+    }
+
+    @GetMapping("/create-petition")
+    public String showCreatePetitionForm(Model model) {
+        model.addAttribute("petition", new Petition());
+        return "create-petition";
+    }
+
+    @PostMapping("/create-petition")
+    public String createPetition(@ModelAttribute("petition") Petition petition) {
+        // Save the new petition using your service
+        petitionService.createPetition(petition);
+        return "redirect:/list-petitions"; // Redirect to the list of petitions
+    }
+
+    @GetMapping("/view-signers/{petitionId}")
+    public String viewSigners(@PathVariable Long petitionId, Model model) {
+        Petition petition = petitionService.findPetitionWithSigners(petitionId);
+        model.addAttribute("petition", petition);
+        return "view-signers";
+    }
+
+
 }
 
 
