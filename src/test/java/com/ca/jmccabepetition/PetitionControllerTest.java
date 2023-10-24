@@ -1,20 +1,16 @@
 package com.ca.jmccabepetition;
 
 import com.ca.jmccabepetition.controller.PetitionController;
-import com.ca.jmccabepetition.service.PetitionService;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(PetitionController.class)
 public class PetitionControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    //@Autowired
+    //private MockMvc mockMvc;
 
-    @Mock
-    private PetitionService petitionService;
+    //@Mock
+    //private PetitionService petitionService;
 /*
    @Test
     public void testShowCreatePetitionForm() throws Exception {
