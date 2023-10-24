@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+<h1>Search Results</h1>
+<!-- Display user information if available -->
+<div th:if="${user != null}">
+    <p>Welcome, <span th:text="${user.firstName}"></span>!</p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+</div>
+
+<form th:action="@{/search-petitions}" method="get">
+    <input type="text" name="keyword" placeholder="Search Petitions">
+    <button type="submit">Search</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="petition : ${searchResults}">
+        <td th:text="${petition.id}">Petition ID</td>
+        <td th:text="${petition.title}">Title</td>
+        <td th:text="${petition.description}">Description</td>
+        <td>
+            <form th:action="@{/sign-petition}" method="post">
+                <input type="hidden" name="petitionId" th:value="${petition.id}">
+                <button type="submit">Sign</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p><a href="/">Back to Home</a></p>
+</body>
+</html>

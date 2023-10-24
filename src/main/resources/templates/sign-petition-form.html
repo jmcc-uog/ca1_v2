@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Petition</title>
+</head>
+<body>
+<h1>Sign Petition</h1>
+<div th:if="${user != null}">
+    <p>Welcome, <span th:text="${user.firstName}"></span>!</p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+</div>
+<!-- Display petition information -->
+<h2>Petition Information</h2>
+<p>Title: <span th:text="${petition.title}"></span></p>
+<p>Description: <span th:text="${petition.description}"></span></p>
+
+<!-- Sign Petition Form -->
+<h2>Your Information</h2>
+<form action="/sign-petition" method="post">
+    <!-- Hidden input to store the petition ID -->
+    <input type="hidden" name="petitionId" th:value="${petition.id}" />
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <button type="submit">Sign</button>
+</form>
+
+<a href="/list-petitions">Back to List of Petitions</a>
+</body>
+</html>
