@@ -1,63 +1,57 @@
 package com.ca.jmccabepetition;
 
-import com.ca.jmccabepetition.controller.PetitionController;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import com.ca.jmccabepetition.model.Petition;
+import com.ca.jmccabepetition.service.PetitionService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-@WebMvcTest(PetitionController.class)
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+@SpringBootTest
+@AutoConfigureMockMvc
 public class PetitionControllerTest {
 
-    //@Autowired
-    //private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-    //@Mock
-    //private PetitionService petitionService;
-/*
-   @Test
+    @MockBean
+    private PetitionService petitionService;
+
+    @Test
+    public void testShowAllPetitions() throws Exception {
+        Petition petition1 = new Petition("Petition 1", "Description 1");
+        Petition petition2 = new Petition("Petition 2", "Description 2");
+        List<Petition> petitions = Arrays.asList(petition1, petition2);
+
+        when(petitionService.getAllPetitions()).thenReturn(petitions);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/list-petitions"))
+                .andExpect(status().isOk());
+
+
+
+    }
+
+
+
+    // Add more test methods for other controller actions as needed
+
+    @Test
     public void testShowCreatePetitionForm() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/create-petition"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("create-petition"))
                 .andExpect(model().attributeExists("petition"));
-        // You can add more specific assertions based on your requirements
     }
 
-    @Test
-    public void testShowPetitionById() throws Exception {
-        Long petitionId = 1L;
-        Petition petition = new Petition(); // Create a sample petition
-
-        when(petitionService.findPetitionById(petitionId)).thenReturn(Optional.of(petition));
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/petition/{petitionId}", petitionId))
-                .andExpect(status().isOk())
-                .andExpect(view().name("view-petition"))
-                .andExpect(model().attribute("petition", petition));
-        // You can add more specific assertions based on your requirements
-    }
-
-    @Test
-    public void testShowSignersForPetition() throws Exception {
-        Long petitionId = 1L;
-        Petition petition = new Petition(); // Create a sample petition with signers
-
-        when(petitionService.findPetitionWithSigners(petitionId)).thenReturn(petition);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/view-signers/{petitionId}", petitionId))
-                .andExpect(status().isOk())
-                .andExpect(view().name("view-signers"))
-                .andExpect(model().attribute("petition", petition));
-        // You can add more specific assertions based on your requirements
-    }
-
-    @Test
-    public void testCreatePetition() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/create-petition"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("create-petition"))
-                .andExpect(model().attributeExists("petition"));
-        // You can add more specific assertions based on your requirements
-    }
-*/
-    // Add more controller tests as needed
+    // Add more test methods for other controller actions as needed
 }
-

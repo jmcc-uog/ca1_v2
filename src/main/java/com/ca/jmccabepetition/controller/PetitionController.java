@@ -5,13 +5,11 @@ import com.ca.jmccabepetition.model.Petition;
 import com.ca.jmccabepetition.model.Signer;
 import com.ca.jmccabepetition.model.User;
 import com.ca.jmccabepetition.repository.PetitionRepository;
-import com.ca.jmccabepetition.repository.UserRepository;
 import com.ca.jmccabepetition.service.PetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +19,13 @@ import java.util.Optional;
 public class PetitionController {
 
     private final PetitionRepository petitionRepository;
-    private final UserRepository userRepository;
+
     private final PetitionService petitionService;
 
     @Autowired
-    public PetitionController(PetitionRepository petitionRepository, UserRepository userRepository, PetitionService petitionService) {
+    public PetitionController(PetitionRepository petitionRepository, PetitionService petitionService) {
         this.petitionRepository = petitionRepository;
-        this.userRepository = userRepository;
+
         this.petitionService = petitionService;
     }
 
@@ -53,20 +51,6 @@ public class PetitionController {
     }
 
 
-    @GetMapping("/signup")
-    public String signUpForm() {
-        return "signup";
-    }
-
-    @PostMapping("/signup")
-    public String signUp(@RequestParam("firstName") String firstName,
-                         @RequestParam("lastName") String lastName,
-                         @RequestParam("email") String email, RedirectAttributes redirectAttributes){
-        User user = new User(firstName, lastName, email);
-        userRepository.save(user);
-        redirectAttributes.addFlashAttribute("user", user);
-        return "redirect:/list-petitions";
-    }
     @GetMapping("/sign-petition-form")
     public String showPetitionSigningForm(@RequestParam("petitionId") Long petitionId, Model model) {
         // Retrieve the petition with the given petitionId from the database

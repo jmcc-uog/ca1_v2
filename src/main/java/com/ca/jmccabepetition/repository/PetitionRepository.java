@@ -11,8 +11,6 @@ import java.util.List;
 
 @Repository
 public interface PetitionRepository extends JpaRepository<Petition, Long> {
-    // You can define custom query methods here if needed.
-    List<Petition> findByTitleContainingIgnoreCase(String keyword);
     List<Petition> findByTitleContainingOrDescriptionContaining(String title, String description);
     @Query("SELECT p FROM Petition p LEFT JOIN FETCH p.signers WHERE p.id = :petitionId")
     Petition findByIdWithSigners(@Param("petitionId") Long petitionId);

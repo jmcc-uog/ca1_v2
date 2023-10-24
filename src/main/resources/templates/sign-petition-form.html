@@ -6,10 +6,6 @@
 </head>
 <body>
 <h1>Sign Petition</h1>
-<div th:if="${user != null}">
-    <p>Welcome, <span th:text="${user.firstName}"></span>!</p>
-    <p>Email: <span th:text="${user.email}"></span></p>
-</div>
 <!-- Display petition information -->
 <h2>Petition Information</h2>
 <p>Title: <span th:text="${petition.title}"></span></p>

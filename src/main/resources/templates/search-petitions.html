@@ -6,16 +6,9 @@
 </head>
 <body>
 <h1>Search Results</h1>
-<!-- Display user information if available -->
-<div th:if="${user != null}">
-    <p>Welcome, <span th:text="${user.firstName}"></span>!</p>
-    <p>Email: <span th:text="${user.email}"></span></p>
-</div>
 
-<form th:action="@{/search-petitions}" method="get">
-    <input type="text" name="query" placeholder="Search Petitions">
-    <button type="submit">Search</button>
-</form>
+
+
 <table>
     <thead>
     <tr>
@@ -38,10 +31,16 @@
             <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
                 <button type="submit">View Signers</button>
             </form>
+
         </td>
     </tr>
     </tbody>
 </table>
+
+<form action="/search-petitions" method="get">
+    <input type="text" name="query" placeholder="Search Petitions">
+    <button type="submit">Search</button>
+</form>
 <p><a href="/">Back to Home</a></p>
 </body>
 </html>
