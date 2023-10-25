@@ -18,15 +18,15 @@ pipeline {
         }
         stage('Prepare') {
             steps {
-                    script {
+
                             // Update the application.properties file with the right test info parameter
                             sh '''
                                 sed -i "s/^spring.datasource.username=.*/spring.datasource.username=$DB_USERNAME/" /src/main/resources/application.properties
                                 sed -i "s/^spring.datasource.url=.*/spring.datasource.url=$DB_URL/" /src/main/resources/application.properties
                                 sed -i "s/^spring.datasource.password=.*/spring.datasource.url=$DB_PASSWORD/" /src/main/resources/application.properties
                             '''
-                        }
 
+            }
         }
 
         stage('Clean') {
