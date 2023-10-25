@@ -2,45 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Petitions</title>
+    <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h1>Search Results</h1>
+<div class="container">
+    <header class="page-header">
+        <h1>Search Petitions</h1>
+    </header>
 
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list-petitions">List Petitions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-petition">Create Petition</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search-petitions">Search Petition</a>
+            </li>
+        </ul>
+    </nav>
 
+    <h2>Search Petitions</h2>
+    <form action="/search-petitions" method="get">
+        <div class="mb-3">
+            <label for="Query" class="form-label">Query</label>
+            <input type="text" class="form-control" id="query" name="query" placeholder="Enter query">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="petition : ${searchResults}">
-        <td th:text="${petition.id}">Petition ID</td>
-        <td th:text="${petition.title}">Title</td>
-        <td th:text="${petition.description}">Description</td>
-        <td>
-            <form th:action="@{/sign-petition}" method="post">
-                <input type="hidden" name="petitionId" th:value="${petition.id}">
-                <button type="submit">Sign</button>
-            </form>
-            <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
-                <button type="submit">View Signers</button>
-            </form>
+    <!-- Display Search Results -->
+    <h3>Search Results</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Petition ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+            <th>Signers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="petition : ${searchResults}">
+            <td th:text="${petition.id}">-</td>
+            <td th:text="${petition.title}">-</td>
+            <td th:text="${petition.description}">-</td>
+            <td>
+                <form action="/sign-petition-form" method="get">
+                    <input type="hidden" name="petitionId" th:value="${petition.id}">
+                    <button type="submit">Sign</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
+                    <button type="submit">View Signers</button>
+                </form>
 
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<form action="/search-petitions" method="get">
-    <input type="text" name="query" placeholder="Search Petitions">
-    <button type="submit">Search</button>
-</form>
-<p><a href="/">Back to Home</a></p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

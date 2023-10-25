@@ -2,26 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>John McCabe CA1</title>
+    <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h1>Welcome to Our Petition Platform</h1>
-<p>Explore and sign petitions created by the community.</p>
 
+<div class="container">
+    <header class="page-header">
+        <h1>Petition Platform</h1>
+    </header>
 
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="/list-petitions">List Petitions</a></li>
+            <li><a href="/create-petition">Create Petition</a></li>
+            <li><a href="/search-petitions">Search Petition</a></li>
+        </ul>
+    </nav>
 
-<h2>do you want to create a petition?</h2>
+    <div class="row">
+        <div class="span12">
+            <h2>Welcome to our Petition Platform</h2>
+            <p>Explore and sign petitions created by the community.</p>
+        </div>
+    </div>
+</div>
 
-<a href="/create-petition">Create a Petition</a>
-
-<h2>Do you want to list all petitions currently available?</h2>
-
-<a href="/list-petitions">Browse Petitions</a>
-
-<h2>or Do you want to search for a petition?</h2>
-<form action="/search-petitions" method="get">
-    <input type="text" name="query" placeholder="Search Petitions">
-    <button type="submit">Search</button>
-</form>
+<script src="https://cdn.jsdelivr.net/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

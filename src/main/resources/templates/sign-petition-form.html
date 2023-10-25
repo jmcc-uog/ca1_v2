@@ -2,33 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Petition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Petitions</title>
+    <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h1>Sign Petition</h1>
-<!-- Display petition information -->
-<h2>Petition Information</h2>
-<p>Title: <span th:text="${petition.title}"></span></p>
-<p>Description: <span th:text="${petition.description}"></span></p>
 
-<!-- Sign Petition Form -->
-<h2>Your Information</h2>
-<form action="/sign-petition" method="post">
-    <!-- Hidden input to store the petition ID -->
-    <input type="hidden" name="petitionId" th:value="${petition.id}" />
+<div class="container">
+    <header class="page-header">
+        <h1>Sign Petition</h1>
+    </header>
 
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName" required><br>
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list-petitions">List Petitions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-petition">Create Petition</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search-petitions">Search Petition</a>
+            </li>
+        </ul>
+    </nav>
 
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required><br>
+    <h2>Sign Petition</h2>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
+    <h3>Petition Information</h3>
+    <p>Title: <span th:text="${petition.title}"></span></p>
+    <p>Description: <span th:text="${petition.description}"></span></p>
 
-    <button type="submit">Sign</button>
-</form>
+    <form action="/sign-petition" method="post">
+        <input type="hidden" name="petitionId" th:value="${petition.id}" />
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name">
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-success">Sign Petition</button>
+    </form>
+</div>
 
-<a href="/list-petitions">Back to List of Petitions</a>
 </body>
 </html>

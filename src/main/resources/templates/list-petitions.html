@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Petitions</title>
+    <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h1>List of Petitions</h1>
+<div class="container">
+    <header class="page-header">
+        <h1>List Petitions</h1>
+    </header>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Iterate through the list of petitions and display each one -->
-    <tr th:each="petition : ${petitions}">
-        <td th:text="${petition.id}">-</td>
-        <td th:text="${petition.title}">-</td>
-        <td th:text="${petition.description}">-</td>
-        <td>
-            <!-- Add a button to sign the petition -->
-            <form action="/sign-petition-form" method="get">
-                <input type="hidden" name="petitionId" th:value="${petition.id}">
-                <button type="submit">Sign</button>
-            </form>
-            <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
-                <button type="submit">View Signers</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/list-petitions">List Petitions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-petition">Create Petition</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search-petitions">Search Petition</a>
+            </li>
+        </ul>
+    </nav>
 
-<h2>if you want to search for a particular petition please enter your query here</h2>
-<form action="/search-petitions" method="get">
-    <input type="text" name="query" placeholder="Search Petitions">
-    <button type="submit">Search</button>
-</form>
-<a href="/">Back to Home</a>
+    <h2>Petitions List</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="petition : ${petitions}">
+            <td th:text="${petition.id}">-</td>
+            <td th:text="${petition.title}">-</td>
+            <td th:text="${petition.description}">-</td>
+            <td>
+                <!-- Add a button to sign the petition -->
+                <form action="/sign-petition-form" method="get">
+                    <input type="hidden" name="petitionId" th:value="${petition.id}">
+                    <button type="submit">Sign</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/view-signers/{petitionId}(petitionId=${petition.id})}" method="get">
+                    <button type="submit">View Signers</button>
+                </form>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+
+
+
+
 </body>
 </html>

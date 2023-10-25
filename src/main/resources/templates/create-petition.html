@@ -2,20 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Petition </title>
+    <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<form th:action="@{/create-petition}" th:object="${petition}" method="post">
-    <label for="title">Title:</label>
-    <input type="text" id="title" th:field="*{title}" />
+<div class="container">
+    <header class="page-header">
+        <h1>Create Petition</h1>
+    </header>
 
-    <label for="description">Description:</label>
-    <textarea id="description" th:field="*{description}"></textarea>
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list-petitions">List Petitions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/create-petition">Create Petition</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/search-petitions">Search Petition</a>
+            </li>
+        </ul>
+    </nav>
 
-    <!-- Add more fields as needed -->
+    <h2>Create a New Petition</h2>
+    <form th:action="@{/create-petition}" th:object="${petition}" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" th:field="*{title}" placeholder="Enter title">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" th:field="*{description}" name="description" rows="4" placeholder="Enter description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Petition</button>
+    </form>
+</div>
 
-    <button type="submit">Create Petition</button>
-</form>
+<script src="https://cdn.jsdelivr.net/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

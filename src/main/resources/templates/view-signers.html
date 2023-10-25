@@ -2,17 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Signers</title>
+    <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h2>Signers of the Petition: <span th:text="${petition.title}"></span></h2>
-<ul>
-    <li th:each="signer : ${petition.signers}">
-        <p th:text="${signer.firstName} + ' ' + ${signer.lastName} + ' (' + ${signer.email} + ')'"></p>
-    </li>
-</ul>
+<div class="container">
+    <header class="page-header">
+        <h1>View Signers</h1>
+    </header>
 
-<!-- Add a link to navigate back to the list of petitions -->
-<a href="/list-petitions">Back to List of Petitions</a>
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list-petitions">List Petitions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/create-petition">Create Petition</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search-petitions">Search Petition</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h2>List of Signers</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="signer : ${petition.signers}">
+            <td th:text="${petition.id}">-</td>
+            <td th:text="${signer.firstName}">-</td>
+            <td th:text="${signer.lastName}">-</td>
+            <td th:text="${signer.email}">-</td>
+
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
