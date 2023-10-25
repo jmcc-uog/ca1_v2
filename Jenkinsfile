@@ -5,6 +5,7 @@ pipeline {
             DB_URL = credentials('DB_URL')
             DB_USERNAME = credentials('DB_USERNAME')
             DB_PASSWORD = credentials('DB_PASSWORD')
+            SOURCE_CODE_PATH = pwd()
         }
 
     stages {
@@ -21,9 +22,9 @@ pipeline {
 
                             // Update the application.properties file with the right test info parameter
                             sh '''
-                                sed -i "s/^spring.datasource.username=.*/spring.datasource.username=$DB_USERNAME/" /src/main/resources/application.properties
-                                sed -i "s/^spring.datasource.url=.*/spring.datasource.url=$DB_URL/" /src/main/resources/application.properties
-                                sed -i "s/^spring.datasource.password=.*/spring.datasource.url=$DB_PASSWORD/" /src/main/resources/application.properties
+                                sed -i "s/^spring.datasource.username=.*/spring.datasource.username=$DB_USERNAME/" SOURCE_CODE_PATH/src/main/resources/application.properties
+                                sed -i "s/^spring.datasource.url=.*/spring.datasource.url=$DB_URL/" SOURCE_CODE_PATH/src/main/resources/application.properties
+                                sed -i "s/^spring.datasource.password=.*/spring.datasource.url=$DB_PASSWORD/" SOURCE_CODE_PATH/src/main/resources/application.properties
                             '''
 
             }
