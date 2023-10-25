@@ -2,10 +2,33 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Error Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Page </title>
+  <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<h1>Error</h1>
-<p th:text="${errorMessage}"></p>
+  <div class="container">
+    <header class="page-header">
+      <h1>Error</h1>
+    </header>
+
+    <nav>
+      <ul class="nav nav-pills">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="/list-petitions">List Petitions</a></li>
+        <li><a href="/create-petition">Create Petition</a></li>
+        <li><a href="/search-petitions">Search Petition</a></li>
+      </ul>
+    </nav>
+    <div class="alert alert-danger" role="alert">
+      <h3>Something went wrong!</h3>
+      <p>We apologize for the inconvenience. Please try again later.</p>
+      <p th:text="${errorMessage}"></p>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
