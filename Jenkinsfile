@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+            DB_URL = credentials('DATABASE_URL')
+            DB_USERNAME = credentials('DATABASE_USERNAME')
+            DB_PASSWORD = credentials('DATABASE_PASSWORD')
+        }
+
     stages {
         stage('Checkout') {
             steps {
@@ -9,6 +15,18 @@ pipeline {
                     url: 'https://github.com/jmcc-uog/ca1_v2.git',
                     branch: 'main' // Specify the branch you want to build
             }
+        }
+        stage('Prepare') {
+            steps {
+                    script {
+                            // Update the application.properties file with the right test info parameter
+                            sh '''
+                                sed -i "s/^spring.datasource.username=.*/spring.datasource.username=$DB_USERNAME/" /src/main/resources/application.properties
+                                sed -i "s/^spring.datasource.url=.*/spring.datasource.url=$DB_URL/" /src/main/resources/application.properties
+                                sed -i "s/^spring.datasource.password=.*/spring.datasource.url=$DB_PASSWORD/" /src/main/resources/application.properties
+                            '''
+                        }
+
         }
 
         stage('Clean') {
