@@ -84,7 +84,8 @@ pipeline {
             steps {
                     sh '''
 
-                       scp -i /var/lib/jenkins/workspace/college-jenkins_key.pem ROOT.war  azureuser@10.1.0.5:/opt/tomcat/webapps/ROOT.war
+                       scp -i /var/lib/jenkins/workspace/college-jenkins_key.pem ROOT.war  azureuser@10.1.0.5:/tmp/ROOT.war
+                       ssh -i /var/lib/jenkins/workspace/college-jenkins_key.pem azureuser@10.1.0.5 'mv /tmp/ROOT.war /opt/tomcat/webapps/'
                     '''
              }
           }
