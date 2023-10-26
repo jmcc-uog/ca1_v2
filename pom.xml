@@ -107,7 +107,7 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>additional_resources</directory>
+
                         </resource>
                     </webResources>
                     <archive>
