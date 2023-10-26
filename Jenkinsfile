@@ -79,18 +79,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                    script {
-                                def azureServicePrincipalId = credentials('56dff281-d3ba-4338-b034-2aa23346aa9c')
-                                //def azureServicePrincipalSecret = credentials('AZURE_SP_SECRET')
-
-                                azureWebAppPublish appName: 'jmcc',
-                                    resourceGroup: 'college-jenkins_group',
-                                    credentialsId: azureServicePrincipalId,
-                                    filePath: '**/target/*.war', // Adjust to your build output
-                                    publishType: 'auto',
-                                    targetDirectory: '',
-                                    clean: true
-                            }
+                    azureWebAppPublish azureCredentialsId: '56dff281-d3ba-4338-b034-2aa23346aa9c',
+                                       resourceGroup: 'college-jenkins_group', appName: 'jmcc',
+                                       filePath: '*.war', sourceDirectory: 'target', targetDirectory: 'webapps'
              }
           }
 
