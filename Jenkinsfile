@@ -55,10 +55,11 @@ pipeline {
                 //Run Package
                 sh '''
                        mvn clean package
+                       mv target/*.war ROOT.war
 
                    '''
 
-                   //mv target/*.war jmccabepetition.war
+
             }
         }
 
@@ -81,9 +82,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                    azureWebAppPublish azureCredentialsId: '56dff281-d3ba-4338-b034-2aa23346aa9c',
-                                       resourceGroup: 'college-jenkins_group', appName: 'jmcc',
-                                       filePath: '*.war', sourceDirectory: 'target', targetDirectory: 'webapps'
+                    sh '''
+
+                       scp -i /home/azureuser/college-jenkins_key.pem ROOT.war  azureuser@10.1.0.5:/opt/tomcat/webapps/ROOT.war
+                    '''
              }
           }
 

@@ -2,7 +2,6 @@ package com.ca.jmccabepetition;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 
 
 @SpringBootApplication(scanBasePackages = "com.ca.jmccabepetition")
@@ -15,10 +14,6 @@ public class JmccabepetitionApplication {
         //app.run(args);
     }
 
-
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(JmccabepetitionApplication.class);
-    }
 
 
 
