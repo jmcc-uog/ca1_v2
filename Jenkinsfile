@@ -63,18 +63,21 @@ pipeline {
         	      		// Create an Approval Button with a timeout of 15minutes.
         	                timeout(time: 60, unit: "MINUTES") {
         	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
+
+
         	                }
 
+                             step
+                                                          {
+                                                                                  emailext mimeType: ‘text/html’,
+                                                                                  subject: “APPROVAL RQD[JENKINS] ${currentBuild.fullDisplayName}”,
+                                                                                  to: “myapp_ops_leads@mailinator.com “,
+                                                                                  body: ‘’’<a href=”${BUILD_URL}input”>click to approve</a>’’’
+                                                          }
         	                echo "Initiating deployment"
 
         	            }
-        	            step
-                        {
-                         emailext mimeType: ‘text/html’,
-                         subject: “APPROVAL RQD[JENKINS] ${currentBuild.fullDisplayName}”,
-                         to: “myapp_ops_leads@mailinator.com “,
-                         body: ‘’’<a href=”${BUILD_URL}input”>click to approve</a>’’’
-                        }
+
 
         }
 
