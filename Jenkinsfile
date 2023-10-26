@@ -55,7 +55,7 @@ pipeline {
                 //Run Package
                 sh '''
                        mvn clean package
-                       mv target/*.war ROOT.war
+                       mv target/*.war jmmccabepetition.war
                    '''
             }
         }
