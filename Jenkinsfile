@@ -57,7 +57,7 @@ pipeline {
                 sh '''
                        mvn clean package
                        mv target/*.war ROOT.war
-                       sudo docker build -t college.azurecr.io/ca:latest .
+                       docker build -t college.azurecr.io/ca:latest .
 
                    '''
 
